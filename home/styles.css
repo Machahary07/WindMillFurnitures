@@ -33,13 +33,13 @@ html, body {
   border-bottom: 1px solid #f1f1f1;
 }
 
+/* matches the log-in page brand */
 .logo {
-  font-family: "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 160%;
-  letter-spacing: 0.15px;
-  color: var(--ink);
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #484848;
 }
 
 .nav-links {
