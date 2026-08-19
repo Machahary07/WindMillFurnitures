@@ -1,0 +1,295 @@
+:root {
+  --ink: #111111;
+  --gray-nav: #8f8f8f;
+  --gray-body: #4b4b4b;
+  --gray-line: rgba(17, 17, 17, 0.13);
+  --red: #bf3529;
+  /* 1440px reference frame: grid runs 100px → 1340px */
+  --grid-margin: 6.94%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: #ffffff;
+  color: var(--ink);
+  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+  padding: 0 28px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.logo {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 160%;
+  letter-spacing: 0.15px;
+  color: var(--ink);
+}
+
+.nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 46px;
+}
+
+.nav-links a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--gray-nav);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.nav-links a.active {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* red underline extends ~25px past the text on each side */
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: -25px;
+  right: -25px;
+  bottom: -1px;
+  height: 2px;
+  background: var(--red);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.search-label {
+  color: #5e5e5e;
+}
+
+.search svg {
+  display: block;
+  margin-top: 1px;
+}
+
+/* ---------- Hero section ---------- */
+
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - 62px); /* 58px nav + 1px border + 3px slack */
+  overflow: hidden;
+  /* image width is capped by viewport height so hero + content
+     always fit without a scrollbar (880/575 aspect → w = h × 1.5304) */
+  --media-top: min(3vw, 4vh);
+  --media-w: min(55vw, calc((100vh - 245px) * 1.5304));
+}
+
+/* 5 fading vertical lines → 4 columns, starting mid-hero, fading at bottom */
+.grid-lines {
+  position: absolute;
+  left: var(--grid-margin);
+  right: var(--grid-margin);
+  bottom: 0;
+  height: 48vh; /* never spans more than half the viewport */
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid-lines span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to top,
+    var(--gray-line) 0%,
+    var(--gray-line) 55%,
+    transparent 96%
+  );
+}
+
+.grid-lines span:nth-child(1) { left: 0; }
+.grid-lines span:nth-child(2) { left: 25%; }
+.grid-lines span:nth-child(3) { left: 50%; }
+.grid-lines span:nth-child(4) { left: 75%; }
+.grid-lines span:nth-child(5) { left: 100%; }
+
+/* centered image, 880×575 aspect — sized so hero + content fit in 100vh */
+.hero-media {
+  position: relative;
+  z-index: 1;
+  width: var(--media-w);
+  margin: var(--media-top) auto 0;
+}
+
+.hero-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 880 / 575;
+  background: #d9d9d9;
+  overflow: hidden;
+}
+
+.hero-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+}
+
+/* washed-out veil so the black title reads, matching the reference */
+.hero-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.38);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Figma: Outfit Bold 200px @ 1440 (≈ 0.227 × image width), 15% tracking,
+   centered, #000. --char-scale is set per slide from JS so longer words
+   render smaller and keep the same overall spread. */
+.hero-title {
+  --title-basis: var(--media-w);
+  --char-scale: 0.227;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  z-index: 4; /* above the image layers (1–2) and the veil (3) */
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: "Outfit", "Open Sans", sans-serif;
+  font-size: calc(var(--title-basis) * var(--char-scale));
+  line-height: 1;
+  font-weight: 700;
+  /* pre-JS fallback tracking; script.js zeroes this and applies the 15%
+     gap as margins between chars so centering stays exact */
+  letter-spacing: 0.15em;
+  color: #000000;
+}
+
+/* ---------- Right carousel indicator ---------- */
+
+.carousel-indicator {
+  position: absolute;
+  top: calc(var(--media-top) + var(--media-w) * 0.28);
+  right: 1.74%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 27px;
+  z-index: 2;
+}
+
+.carousel-indicator span {
+  display: block;
+  height: 2px;
+  width: 26px;
+  background: rgba(17, 17, 17, 0.18);
+  cursor: pointer;
+  transition: width 0.35s ease, background-color 0.35s ease;
+}
+
+.carousel-indicator span.active {
+  width: 50px;
+  background: var(--ink);
+}
+
+/* ---------- Content row ---------- */
+
+.content-row {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 var(--grid-margin);
+  padding-top: 18px;
+  padding-bottom: 22px;
+}
+
+.col {
+  padding: 0 28px;
+}
+
+.col h3 {
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.col p {
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--gray-body);
+  max-width: 250px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero-media {
+    width: 88%;
+    margin-top: 32px;
+  }
+
+  .hero-title {
+    --title-basis: 77vw;
+  }
+
+  .grid-lines {
+    top: 50vw;
+    left: 20px;
+    right: 20px;
+  }
+
+  .carousel-indicator {
+    display: none;
+  }
+
+  .content-row {
+    grid-template-columns: 1fr;
+    margin: 0 20px;
+  }
+
+  .col {
+    padding: 0 0 24px;
+  }
+}

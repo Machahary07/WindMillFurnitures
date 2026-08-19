@@ -1,0 +1,254 @@
+/* tokens mirrored from home/styles.css */
+:root {
+  --ink: #111111;
+  --gray-nav: #8f8f8f;
+  --gray-body: #4b4b4b;
+  --gray-sub: #8f8f8f;
+  --gray-label: #111111;
+  --gray-faint: #b9b9b9;
+  --border: #e3e3e3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---------- Left panel ---------- */
+
+.panel {
+  width: 50.6%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 48px 28px;
+}
+
+.brand {
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #484848;
+}
+
+.form-area {
+  width: 100%;
+  max-width: 544px;
+  margin: auto 0; /* vertically centers between brand and footer */
+  text-align: center;
+}
+
+.form-area h1 {
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  font-size: 54px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.subtitle {
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  margin-top: 14px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--gray-sub);
+}
+
+/* ---------- OAuth buttons ---------- */
+
+.oauth-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 42px;
+}
+
+.oauth-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 56px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.oauth-btn svg {
+  display: block;
+}
+
+/* ---------- Divider ---------- */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 30px 0 26px;
+  color: var(--gray-sub);
+  font-size: 15px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ececec;
+}
+
+/* ---------- Form ---------- */
+
+form {
+  text-align: left;
+}
+
+label {
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-label);
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  outline: none;
+}
+
+input::placeholder {
+  color: var(--gray-faint);
+}
+
+.label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 22px;
+}
+
+.forgot {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-nav);
+  text-decoration: none;
+}
+
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap .eye {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* ---------- Submit ---------- */
+
+.submit-btn {
+  display: block;
+  width: 72%;
+  height: 44px;
+  margin: 34px auto 0;
+  background: #141414;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signup-line {
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  margin-top: 22px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-nav);
+}
+
+.signup-line a {
+  font-family: "Plus Jakarta Sans", "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* ---------- Footer ---------- */
+
+.panel-footer {
+  display: flex;
+  gap: 52px;
+}
+
+.panel-footer a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #b5b5b5;
+  text-decoration: none;
+}
+
+/* ---------- Right art panel ---------- */
+
+.art {
+  width: 49.4%;
+  background: #f2f1ec url("assets/3.jpg") center / cover no-repeat;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 860px) {
+  .art {
+    display: none;
+  }
+
+  .panel {
+    width: 100%;
+    padding: 28px 24px 24px;
+  }
+
+  .form-area h1 {
+    font-size: 38px;
+  }
+
+  .oauth-row {
+    flex-direction: column;
+  }
+}
